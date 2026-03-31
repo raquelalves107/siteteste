@@ -2,17 +2,56 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Meu Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viagem dos Sonhos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Site de testes </h1>
-  <p>teste de alterações.</p>
+  <header>
+    <h1>🌍 Minha Viagem dos Sonhos</h1>
+    <p>Conheça destinos incríveis pelo mundo</p>
+  </header>
 
-  <button onclick="clicou()">Clique aqui</button>
+  <section class="imagem">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Praia bonita">
+  </section>
 
-  <p id="mensagem"></p>
+  <section>
+    <h2>Destinos desejados</h2>
+
+    <table>
+      <tr>
+        <th>Destino</th>
+        <th>País</th>
+        <th>Preço médio</th>
+      </tr>
+      <tr>
+        <td>Paris</td>
+        <td>França</td>
+        <td>R$ 8.000</td>
+      </tr>
+      <tr>
+        <td>Tokyo</td>
+        <td>Japão</td>
+        <td>R$ 10.000</td>
+      </tr>
+      <tr>
+        <td>Maldivas</td>
+        <td>Maldivas</td>
+        <td>R$ 12.000</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="botao">
+    <button onclick="mostrarMensagem()">Qual destino escolher?</button>
+    <p id="mensagem"></p>
+  </section>
+
+  <footer>
+    <p>Projeto desenvolvido por você 🚀</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
