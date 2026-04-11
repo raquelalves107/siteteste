@@ -26,9 +26,14 @@ const lista = document.getElementById("lista-recados");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const autor = document.getElementById("autor").value;
-  const turma = document.getElementById("turma").value;
-  const mensagem = document.getElementById("mensagem").value;
+  const autor = document.getElementById("autor").value.trim();
+  const turma = document.getElementById("turma").value.trim();
+  const mensagem = document.getElementById("mensagem").value.trim();
+
+  if (!autor || !turma || !mensagem) {
+    alert("Preencha todos os campos.");
+    return;
+  }
 
   push(ref(db, "recados"), {
     autor,
@@ -42,6 +47,11 @@ form.addEventListener("submit", (e) => {
 onValue(ref(db, "recados"), (snapshot) => {
   lista.innerHTML = "";
 
+  if (!snapshot.exists()) {
+    lista.innerHTML = "<p>Nenhum recado cadastrado ainda.</p>";
+    return;
+  }
+
   snapshot.forEach((item) => {
     const dados = item.val();
 
@@ -49,12 +59,12 @@ onValue(ref(db, "recados"), (snapshot) => {
       <div class="recado">
         <strong>${dados.autor}</strong> - ${dados.turma}
         <p>${dados.mensagem}</p>
-        <button onclick="remover('${item.key}')">Excluir</button>
+        <button onclick="removerRecado('${item.key}')">Excluir</button>
       </div>
     `;
   });
 });
 
-window.remover = (id) => {
+window.removerRecado = function (id) {
   remove(ref(db, "recados/" + id));
 };
