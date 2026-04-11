@@ -1,65 +1,102 @@
+/* RESET BÁSICO */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* FUNDO DA PÁGINA */
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
   background: #f2f2f2;
 }
 
+/* CONTAINER PRINCIPAL */
 .container {
   max-width: 800px;
-  margin: 30px auto;
+  margin: 40px auto;
   background: white;
-  padding: 24px;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h1, h2 {
-  margin-top: 0;
+/* TÍTULOS */
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
+p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* FORMULÁRIO */
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 }
 
-input, textarea, button {
+/* INPUTS E TEXTAREA */
+input, textarea {
   padding: 12px;
   font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
+/* TEXTAREA */
 textarea {
   min-height: 100px;
   resize: vertical;
 }
 
+/* BOTÃO */
 button {
+  padding: 12px;
+  background: #007bff;
+  color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
 }
 
+/* HOVER DO BOTÃO */
+button:hover {
+  background: #0056b3;
+}
+
+/* ÁREA DE RECADOS */
+#lista-recados {
+  margin-top: 20px;
+}
+
+/* CARD DO RECADO */
 .recado {
+  background: #fafafa;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 12px;
-  background: #fafafa;
+  padding: 15px;
+  margin-bottom: 15px;
 }
 
-.recado h3 {
-  margin: 0 0 8px;
-}
-
+/* TEXTO DO RECADO */
 .recado p {
-  margin: 6px 0;
+  margin: 8px 0;
+  text-align: left;
 }
 
+/* BOTÃO EXCLUIR */
 .recado button {
-  margin-top: 8px;
+  background: #dc3545;
+  margin-top: 10px;
+}
+
+/* HOVER EXCLUIR */
+.recado button:hover {
+  background: #a71d2a;
 }
