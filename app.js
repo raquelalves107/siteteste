@@ -12,7 +12,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
+  apiKey: "AIzaSyDwSvc1fAPZyX_wlj09SjAjxkclMBp8Z5o",
   authDomain: "mural-da-turma-2569e.firebaseapp.com",
   projectId: "mural-da-turma-2569e",
   storageBucket: "mural-da-turma-2569e.firebasestorage.app",
