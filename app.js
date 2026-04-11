@@ -1,19 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  onSnapshot,
-  deleteDoc,
-  doc,
-  serverTimestamp,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  getDatabase,
+  ref,
+  push,
+  onValue,
+  remove
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDwSvc1fAPZyX_wlj09SjAjxkclMBp8Z5o",
   authDomain: "mural-da-turma-2569e.firebaseapp.com",
+  databaseURL: "https://mural-da-turma-2569e-default-rtdb.firebaseio.com",
   projectId: "mural-da-turma-2569e",
   storageBucket: "mural-da-turma-2569e.firebasestorage.app",
   messagingSenderId: "555049630093",
@@ -21,71 +18,43 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = getDatabase(app);
 
 const form = document.getElementById("form-recado");
-const listaRecados = document.getElementById("lista-recados");
+const lista = document.getElementById("lista-recados");
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-  const autor = document.getElementById("autor").value.trim();
-  const turma = document.getElementById("turma").value.trim();
-  const mensagem = document.getElementById("mensagem").value.trim();
+  const autor = document.getElementById("autor").value;
+  const turma = document.getElementById("turma").value;
+  const mensagem = document.getElementById("mensagem").value;
 
-  if (!autor || !turma || !mensagem) {
-    alert("Preencha todos os campos.");
-    return;
-  }
+  push(ref(db, "recados"), {
+    autor,
+    turma,
+    mensagem
+  });
 
-  try {
-    await addDoc(collection(db, "recados"), {
-      autor,
-      turma,
-      mensagem,
-      criadoEm: serverTimestamp()
-    });
-
-    form.reset();
-  } catch (erro) {
-    console.error("Erro ao salvar recado:", erro);
-    alert("Não foi possível salvar o recado.");
-  }
+  form.reset();
 });
 
-const consulta = query(collection(db, "recados"), orderBy("criadoEm", "desc"));
+onValue(ref(db, "recados"), (snapshot) => {
+  lista.innerHTML = "";
 
-onSnapshot(consulta, (snapshot) => {
-  listaRecados.innerHTML = "";
+  snapshot.forEach((item) => {
+    const dados = item.val();
 
-  snapshot.forEach((documento) => {
-    const recado = documento.data();
-
-    const card = document.createElement("div");
-    card.className = "recado";
-
-    card.innerHTML = `
-      <h3>${recado.autor}</h3>
-      <p><strong>Turma:</strong> ${recado.turma}</p>
-      <p>${recado.mensagem}</p>
-      <button data-id="${documento.id}">Excluir</button>
+    lista.innerHTML += `
+      <div class="recado">
+        <strong>${dados.autor}</strong> - ${dados.turma}
+        <p>${dados.mensagem}</p>
+        <button onclick="remover('${item.key}')">Excluir</button>
+      </div>
     `;
-
-    listaRecados.appendChild(card);
-  });
-
-  const botoesExcluir = document.querySelectorAll("[data-id]");
-
-  botoesExcluir.forEach((botao) => {
-    botao.addEventListener("click", async () => {
-      const id = botao.getAttribute("data-id");
-
-      try {
-        await deleteDoc(doc(db, "recados", id));
-      } catch (erro) {
-        console.error("Erro ao excluir recado:", erro);
-        alert("Não foi possível excluir o recado.");
-      }
-    });
   });
 });
+
+window.remover = (id) => {
+  remove(ref(db, "recados/" + id));
+};
