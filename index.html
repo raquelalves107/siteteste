@@ -3,56 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viagem dos Sonhos</title>
+  <title>Mural da Turma</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="container">
+    <h1>Mural da Turma</h1>
+    <p>Projeto inicial para aprender Firebase</p>
 
-  <header>
-    <h1>🌍 Viagem da raquel</h1>
-    <p>Conheça destinos incríveis pelo mundo</p>
-  </header>
+    <form id="form-recado">
+      <input type="text" id="autor" placeholder="Seu nome" required>
+      <input type="text" id="turma" placeholder="Turma" required>
+      <textarea id="mensagem" placeholder="Digite um recado" required></textarea>
+      <button type="submit">Salvar recado</button>
+    </form>
 
-  <section class="imagem">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Praia bonita">
-  </section>
+    <section>
+      <h2>Recados enviados</h2>
+      <div id="lista-recados"></div>
+    </section>
+  </main>
 
-  <section>
-    <h2>Destinos desejados</h2>
-
-    <table>
-      <tr>
-        <th>Destinos</th>
-        <th>País</th>
-        <th>Preço médio</th>
-      </tr>
-      <tr>
-        <td>Paris</td>
-        <td>França</td>
-        <td>R$ 8.000</td>
-      </tr>
-      <tr>
-        <td>Tokyo</td>
-        <td>Japão</td>
-        <td>R$ 10.000</td>
-      </tr>
-      <tr>
-        <td>Maldivas</td>
-        <td>Maldivas</td>
-        <td>R$ 12.000</td>
-      </tr>
-    </table>
-  </section>
-
-  <section class="botao">
-    <button onclick="mostrarMensagem()">Qual destino escolher?</button>
-    <p id="mensagem"></p>
-  </section>
-
-  <footer>
-    <p>Projeto desenvolvido por você 🚀</p>
-  </footer>
-
-  <script src="script.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
